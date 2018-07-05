@@ -1,0 +1,21 @@
+1.主要还是需要看看文档
+
+2.支付宝支付,主要的就是密钥和私钥一定要配置清除,内部的逻辑代码官方文档都给的很清楚
+支付宝支付在bat里面生成的是公钥密钥在rsa_private_key.pem进行查看,或者下载alipay-sdk-PHP-3.0.0
+
+3.微信支付:出现curl错误:修改Api.php中的536行
+添加:curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,FALSE);
+        curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,FALSE);//严格校验2
+这两个是https协议验证
+
+英文错误:53行  有可能是获取不到本地ip  
+$inputObj->SetSpbill_create_ip(gethostbyname($_ENV['COMPUTERNAME']));//终端ip
+
+4.微信回调的时候你这个回调地址必须是可以直接访问的,不然不能用,不能继承登录接口的
+(主要你回调的那个方法是否外部可以直接访问,如果你验证了是否登录问题,外部可能不能访问,
+最好写在一个外部能够访问的方法里面)
+
+5.微信中的key要在百度自行生成,然后在商户里面的api管理里面添加,
+微信配置主要zai有config的文件里面
+
+
